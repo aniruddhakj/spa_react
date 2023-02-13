@@ -1,59 +1,114 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
-const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
-  const [error, setError] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (!username || !password || !role) {
-      setError('Please enter all the fields!');
-    } else {
-      setError('');
-      // perform login check here
-      // you can either check the credentials from a database or
-      // hardcode the credentials in the code
-
-      // Example of hardcoded credentials
-      const adminCredentials = {
-        username: 'admin',
-        password: 'admin',
-        role: 'admin'
-      };
-      const userCredentials = {
-        username: 'user',
-        password: 'user',
+// add sample data for users and admins
+const users = [
+    {
+        userId: 'user1',
+        password: 'user1',
         role: 'user'
-      };
-      if (username === adminCredentials.username && password === adminCredentials.password && role === adminCredentials.role) {
-        // redirect to admin page
-        alert('Admin Login Successful!');
-      } else if (username === userCredentials.username && password === userCredentials.password && role === userCredentials.role) {
-        // redirect to user page
-        alert('User Login Successful!');
-      } else {
-        setError('Invalid Credentials. Please try again!');
-      }
+    },
+    {
+        userId: 'user2',
+        password: 'user2',
+        role: 'user'
     }
-  };
+];
 
-  return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="">Select Role</option>
-          <option value="admin">Admin</option>
-          <option value="user">User</option>
-        </select>
-        <button type="submit">Login</button>
-      </form>
-      {error && <p>{error}</p>}
-    </div>
-  );
+const admins = [
+    {
+        userId: 'admin1',
+        password: 'admin1',
+        role: 'admin'
+    },
+    {
+        userId: 'admin2',
+        password: 'admin2',
+        role: 'admin'
+    }
+];
+
+
+
+const Login = () => {
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+    // select the role from the dropdown containing user and admin
+    const [role, setRole] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [error, setError] = useState('');
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const user = {
+            userId,
+            password,
+            role
+        };
+        // check if the user is an admin or a user
+        if (role === 'admin') {
+            const admin = admins.find((admin) => admin.userId === userId && admin.password === password);
+            if (admin) {
+                localStorage.setItem('user', JSON.stringify(admin));
+                setLoggedIn(true);
+            } else {
+                setError('Invalid Credentials');
+				// display error message as a popup
+				alert('Please enter valid credentials');
+            }
+        } else if (role === 'user') {
+            const user = users.find((user) => user.userId === userId && user.password === password);
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+                setLoggedIn(true);
+            } else {
+                setError('Invalid Credentials');
+				// display error message as an alert
+				alert('Please enter valid credentials');
+            }
+        }
+    };
+    
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setLoggedIn(true);
+        }
+    }, []);
+
+    if (loggedIn) { 
+      // check role and redirect to admin or user dashboard
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user.role === 'admin') {
+        return <Navigate to="/admin" />;
+      } 
+      return <Navigate to="/user" />;
+    }
+    return (
+        <div>
+            <h3>Login</h3>  
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="userId">UserId</label>
+                    <input type="text" className="form-control" id="userId" placeholder="Enter User Id" value={userId} onChange={(e) => setUserId(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="role">Role</label>
+                    <select className="form-control" id="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                        <option value="">Select Role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    );
 };
 
-export default LoginPage;
+export default Login;
