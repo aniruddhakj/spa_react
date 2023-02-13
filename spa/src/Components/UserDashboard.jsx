@@ -53,7 +53,7 @@ class UserDashboard extends Component {
 			return images.map((image) => {
 				return (
 					<div className="image" key={image.id}>
-						<img src={image.url} alt={image.id} width="200" />
+						<img src={image.url} alt={image.id} />
 					</div>
 				);
 			});
