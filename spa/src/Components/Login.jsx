@@ -29,10 +29,10 @@ const LoginPage = () => {
       };
       if (username === adminCredentials.username && password === adminCredentials.password && role === adminCredentials.role) {
         // redirect to admin page
-        console.log('Admin Login Successful!');
+        alert('Admin Login Successful!');
       } else if (username === userCredentials.username && password === userCredentials.password && role === userCredentials.role) {
         // redirect to user page
-        console.log('User Login Successful!');
+        alert('User Login Successful!');
       } else {
         setError('Invalid Credentials. Please try again!');
       }
