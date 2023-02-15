@@ -17,7 +17,7 @@ class AdminDashboard extends Component {
 
     // add a new method to get the labels from localStorage
     getLabels = () => {
-        const labels = JSON.parse(localStorage.getItem('labels'));
+        const labels = JSON.parse(sessionStorage.getItem('labels'));
         if (labels) {
             this.setState({ labels });
         }
@@ -40,6 +40,11 @@ class AdminDashboard extends Component {
                 return { id: image, url: images[image], label: null };
             })
         })
+        console.log(images);
+        // get the labels from current session
+        if(sessionStorage.getItem('labels') ){
+            this.setState({ labels: JSON.parse(sessionStorage.getItem('labels')) });
+        }
     }
 
     // admin can create new labels
@@ -51,10 +56,12 @@ class AdminDashboard extends Component {
     // add a new method to handle the click on the add label button
     handleNewLabelClick = () => {
         const { labels, newLabel } = this.state;
-        // add the new label to the labels array
-        this.setState({ labels: [...labels, newLabel], newLabel: '' });
-        // update localStorage
-        localStorage.setItem('labels', JSON.stringify([...labels, newLabel]));
+        // append the new label to the labels array
+        labels.push(newLabel);
+        // save the labels array to sessionStorage
+        sessionStorage.setItem('labels', JSON.stringify(labels));
+        // set the state in response to the labels array
+        this.setState({ labels, newLabel: '' });
     } 
 
     handleLogout = () => {
@@ -108,32 +115,5 @@ class AdminDashboard extends Component {
 
 
 
-
-
-// class AdminDashboard extends Component {
-//     // check loggedIn state and set it to false on logout
-//     state = {
-//         logout: false
-//     };
-
-//     handleLogout = () => {
-//         localStorage.removeItem('user');
-//         this.setState({ logout: true });
-//     };
-
-
-//     render() {
-//         const { logout } = this.state;
-//         if (logout) {
-//             return <Navigate to="/" />;
-//         }
-//         return (
-//             <div>
-//                 <h1>Admin Dashboard</h1>
-//                 <button onClick={this.handleLogout}>Logout</button>
-//             </div>
-//         );
-//     }
-// }
 
 export default AdminDashboard;
