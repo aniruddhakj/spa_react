@@ -5,21 +5,20 @@ import UserDashboard from './components/UserDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Switch is replaced by Routes
+// set default path to login
 class App extends Component {
-  render() {
-	return (
-	  <Router>
-		<div className="App">
-			<Routes>
-				<Route path="/" element={<Login />} />
-				<Route path="/user" element={<UserDashboard />} />
-				<Route path="/admin" element={<AdminDashboard />} />
-		  	</Routes>
-		</div>
-	  </Router>
-	);
-  }
+	render() {
+		return (
+			<Router>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path='/login' element={<Login />}/>
+					<Route path="/user" element={<UserDashboard />} />
+					<Route path="/admin" element={<AdminDashboard />} />
+				</Routes>
+			</Router>
+		);
+	}
 }
 
 export default App;
