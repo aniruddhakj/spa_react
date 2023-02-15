@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
-
+// add style from Login.css
+import './Login.css';
 // add sample data for users and admins
 const users = [
     {
@@ -86,27 +87,39 @@ const Login = () => {
       return <Navigate to="/user" />;
     }
     return (
-        <div>
-            <h3>Login</h3>  
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="userId">UserId</label>
-                    <input type="text" className="form-control" id="userId" placeholder="Enter User Id" value={userId} onChange={(e) => setUserId(e.target.value)} />
+        <div class="container">
+            <div class="screen">
+                <div class="screen__content">
+                    <form className="login" onSubmit={handleSubmit}>
+                        <div class="login__field">
+                            <i class="login__icon fas fa-user"></i>
+                            <input type="text" class="login__input"  placeholder="Enter User Id" value={userId} onChange={(e) => setUserId(e.target.value)} />
+                        </div>
+                        <div class="login__field">
+                            <i class="login__icon fas fa-lock"></i>
+                            <input type="password" class="login__input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <div class="login__field">
+                            <i class="login__icon fas fa-user"></i>
+                            <select class="login__input" value={role} onChange={(e) => setRole(e.target.value)}>
+                                <option value="">Select Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <button class="button login__submit">
+                            <span class="button__text">Log In Now</span>
+                            <i class="button__icon fas fa-chevron-right"></i>
+                        </button>				
+                    </form>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="role">Role</label>
-                    <select className="form-control" id="role" value={role} onChange={(e) => setRole(e.target.value)}>
-                        <option value="">Select Role</option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+                <div class="screen__background">
+                    <span class="screen__background__shape screen__background__shape4"></span>
+                    <span class="screen__background__shape screen__background__shape3"></span>		
+                    <span class="screen__background__shape screen__background__shape2"></span>
+                    <span class="screen__background__shape screen__background__shape1"></span>
+                </div>		
+            </div>
         </div>
     );
 };

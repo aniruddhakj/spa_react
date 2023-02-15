@@ -44,7 +44,9 @@ class UserDashboard extends Component {
 			})
 		})
 		// get the labels from current session
-		this.setState({ labels: JSON.parse(sessionStorage.getItem('labels')) });
+		if (sessionStorage.getItem('labels')) {
+			this.setState({ labels: JSON.parse(sessionStorage.getItem('labels')) });
+		}
 	}
 
 

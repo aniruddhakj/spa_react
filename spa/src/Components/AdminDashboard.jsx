@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
+import './AdminDashboard.css';
 
 class AdminDashboard extends Component {
     state = {
@@ -13,15 +14,7 @@ class AdminDashboard extends Component {
         labels: [],
         newLabel: ''
     }
-    // save the labels somewhere so that they are available to the user
 
-    // add a new method to get the labels from localStorage
-    getLabels = () => {
-        const labels = JSON.parse(sessionStorage.getItem('labels'));
-        if (labels) {
-            this.setState({ labels });
-        }
-    }
 
     // add a new method to import all the images from the src/images folder
     importAll(r) {
@@ -77,13 +70,13 @@ class AdminDashboard extends Component {
         }
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-12">
+                <div className="screen">
+                    <div className="screen_content">
                         <h1>Admin Dashboard</h1>
                         <div className="form-group">
                             <label htmlFor="newLabel">Add a new label</label>
                             <input type="text" className="form-control" id="newLabel" value={newLabel} onChange={this.handleNewLabelChange} />
-                            <button className="btn btn-primary" onClick={this.handleNewLabelClick}>Add Label</button>
+                            <button className="add-label-btn" onClick={this.handleNewLabelClick}>Add Label</button>
                         </div>
                         <div className="form-group">
                             <label htmlFor="labels">Labels</label>
@@ -93,11 +86,10 @@ class AdminDashboard extends Component {
                                 })}
                             </select>
                         </div>
-                        {/* <button className="btn btn-primary" onClick={Navigate('/')}>Logout</button> */}
-                        <button className="btn btn-primary" onClick={this.handleLogout}>Logout</button>
+                        <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
                     </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     {images && images.map((image) => {
                         return (
                             <div className="col-4" key={image.id}>
@@ -105,15 +97,10 @@ class AdminDashboard extends Component {
                             </div>
                         )
                     })}
-                </div>
+                </div> */}
             </div>
         );
     }
 }
-
-
-
-
-
 
 export default AdminDashboard;
