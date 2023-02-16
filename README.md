@@ -5,6 +5,10 @@ To run the application, please follow the steps below:
 - Clone the repository
 
 - Make sure you have node and npm installed
+- Navigate to application path
+```bash
+cd spa
+```
 
 - Install the dependencies
 ```bash
