@@ -1,8 +1,17 @@
+*{outline: none;}
+
+body{
+    background-color: #607d8b;
+}
+
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 
@@ -10,7 +19,7 @@
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
 	height: 600px;
-	width: 360px;	
+	width: 500px;	
 	box-shadow: 0px 0px 24px #5C5696;
 }
 
@@ -19,3 +28,150 @@
 	position: relative;	
 	height: 100%;
 }
+
+/* heading h1 inside screen__content should be centered */
+.heading {
+    text-align: center;
+    margin-top: 10%;
+    padding: 10px;
+}
+
+
+
+/* add-label-btn  */
+.form-group {
+    display: flex;
+    width: 500px;
+    margin-top: 8%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.form-group input {
+    padding: 30px 20px;
+    font-size: 1em;
+    -webkit-border-top-left-radius: 25px;
+    -webkit-border-bottom-left-radius: 25px;
+    -moz-border-radius-topleft: 25px;
+    -moz-border-radius-bottomleft: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: none;
+    border: none;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.19);
+}
+
+.form-group button {
+    padding-right: 20px;
+    background-color: #fff;
+    -webkit-border-top-right-radius: 25px;
+    -webkit-border-bottom-right-radius: 25px;
+    -moz-border-radius-topright: 25px;
+    -moz-border-radius-bottomright: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.19);
+    border: none;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.form-group button span {
+    margin-left: 50px;
+    padding: 24px 45px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #fff;
+    background-color: #f54e59;
+    border-radius: 20px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.19);
+}
+
+.form-group button span:hover {
+    background-color: #d6121f;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.19);
+}
+
+/*label text and dropdown */
+.form-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10%;
+}
+
+.label-control {
+    font-family: Hack, monospace;
+    font-size: 1.5em;
+    color: #0a0000;
+    margin: 5px;
+    width: 200px;
+}
+
+.label-text {
+    font-family: Hack, monospace;
+    font-size: 1.5em;
+    color: #000000;
+    margin-bottom: 10px;
+    width: 300px;
+    align-items: center;
+    text-align: center;
+}
+
+/* logout button */
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.logout-btn {
+    font-family: Hack, monospace;
+    background: #d3d3d3;
+    color: #2c2c2c;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 1.5rem;
+    border: 0;
+    transition: all 0.5s;
+    border-radius: 10px;
+    width: auto;
+    position: relative;
+    min-width: 250px;
+    align-self: center;
+    margin: 10px;
+}
+
+/* import font awesome 5 free */
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+
+.logout-btn::after {
+    content: "\f2f5";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    position: absolute;
+    left: 80%;
+    top: 54%;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+.logout-btn:hover {
+    background: #2b2bff;
+    transition: all 0.5s;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px #00f 61;
+    padding: 1.5rem 3rem 1.5rem 1.5rem;
+    color: #fff;
+}
+.logout-btn:hover::after {
+    opacity: 1;
+    transition: all 0.5s;
+    color: #fff;
+}
+

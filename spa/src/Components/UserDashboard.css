@@ -1,16 +1,274 @@
-/* this file will be used to style the user dashboard */
+/* import font awesome 5 free */
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+/* import reanie beanie font */
+@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
 
 .user-dashboard {
-  display: flex;
-  flex-direction: column;
+  text-align: center;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: #f5f5f5;
+}
+.user-dashboard-header{
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 4.5em;
+  color: #000000;
+  margin: 5% auto;
+  width: 300px;
+  align-content: center;
 }
 
-/* Path: spa/src/components/NavBar.css */
 
-/* distance all the images from each other */
+.form-wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10%;
+}
 
+.label-control {
+  font-family: Hack, monospace;
+  font-size: 1.5em;
+  color: #0a0000;
+  margin: 5px;
+  width: 200px;
+}
+
+.assign-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.assign-btn {
+  font-family: Hack, monospace;
+  background: #d3d3d3;
+  color: #2c2c2c;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 1.5rem;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 15px;
+  width: auto;
+  position: relative;
+  min-width: 250px;
+  align-self: center;
+  margin: 10px;
+}
+
+
+
+.assign-btn::after {
+  content: "\f055";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 200;
+  position: absolute;
+  left: 90%;
+  top: 54%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.assign-btn:hover {
+  background: rgb(0, 255, 34);
+  transition: all 0.5s;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgb(0, 255, 34) 61;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+  color: #000000;
+}
+.assign-btn:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+  color: #fff;
+}
+
+.delete-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2%;
+}
+
+.delete-btn {
+  font-family: Hack, monospace;
+  background: #d3d3d3;
+  color: #2c2c2c;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 1.5rem;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 15px;
+  width: auto;
+  position: relative;
+  min-width: 250px;
+  align-self: center;
+  margin: 10px;
+}
+
+
+
+.delete-btn::after {
+  content: "\f1f8";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 200;
+  position: absolute;
+  left: 90%;
+  top: 54%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.delete-btn:hover {
+  background: rgba(255, 0, 0, 0.732);
+  transition: all 0.5s;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgb(255, 0, 0, 0.732) 61;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+  color: #000000;
+}
+.delete-btn:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+  color: #fff;
+}
+
+
+.view-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2%;
+}
+
+.view-btn {
+  font-family: Hack, monospace;
+  background: #d3d3d3;
+  color: #2c2c2c;
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 1.5rem;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 15px;
+  width: auto;
+  position: relative;
+  min-width: 250px;
+  align-self: center;
+  margin: 10px;
+}
+
+
+
+.view-btn::after {
+  content: "\f002";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 200;
+  position: absolute;
+  left: 90%;
+  top: 54%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.view-btn:hover {
+  background: rgba(0, 76, 255, 0.732);
+  transition: all 0.5s;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgb(0, 76, 255, 0.732) 61;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+  color: #000000;
+}
+.view-btn:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+  color: #fff;
+}
+
+
+.signout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.signout-btn {
+  font-family: Hack, monospace;
+  background: #d3d3d3;
+  color: #2c2c2c;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 1.5rem;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 10px;
+  width: auto;
+  position: relative;
+  min-width: 250px;
+  align-self: center;
+  margin: 2%;
+}
+
+/* import font awesome 5 free */
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+
+.signout-btn::after {
+  content: "\f2f5";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 200;
+  position: absolute;
+  left: 80%;
+  top: 54%;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.signout-btn:hover {
+  background: #2b2bff;
+  transition: all 0.5s;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px #00f 61;
+  padding: 1.5rem 3rem 1.5rem 1.5rem;
+  color: #fff;
+}
+
+.signout-btn:hover::after {
+  opacity: 1;
+  transition: all 0.5s;
+  color: #fff;
+}
+
+
+figure {
+  display: inline-block;
+  position: relative;
+  left: 0;
+  -moz-transform:rotate(-5deg);
+  -webkit-transform:rotate(-5deg);
+  -ms-transform:rotate(-5deg);
+  transform:rotate(-5deg);
+  padding: 2%;
+}
+
+figcaption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 16px;
+  text-align: center;
+  color: blue;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 30px;
+  padding: 10px;
+}

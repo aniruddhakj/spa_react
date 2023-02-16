@@ -7,6 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // set default path to login
 class App extends Component {
+	// clear session on startup
+	componentDidMount() {
+		sessionStorage.clear();
+	}
 	render() {
 		return (
 			<Router>

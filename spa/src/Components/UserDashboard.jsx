@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
+import './UserDashboard.css';
 
 // global variable to store the images
 
@@ -17,9 +18,7 @@ class UserDashboard extends Component {
 		images: [],
 		// add a new state to store the selected image
 		selectedImages: [],
-		// add a new state to store the selected label
 		selectedLabel: null,
-		// add a new state to store the labels
 		labels: [],
 		// add a new state to store the filtered images
 		filteredImages: [],
@@ -43,8 +42,8 @@ class UserDashboard extends Component {
 				return { id: image, url: images[image], label: null };
 			})
 		})
-		// get the labels from current session
-		if (sessionStorage.getItem('labels')) {
+		// get the labels from current session if labels exist
+		if(sessionStorage.getItem('labels') ){
 			this.setState({ labels: JSON.parse(sessionStorage.getItem('labels')) });
 		}
 	}
@@ -56,13 +55,17 @@ class UserDashboard extends Component {
 		const { images } = this.state;
 		// check if the images array is not empty
 		if (images.length > 0) {
-			// display the images in the images array
+			// display the images in the images array with labels if any
 			return images.map((image) => {
 				return (
-					<div key={image.id} className="col-3">
-						<div className="card">
-							<img src={image.url} className="card-img-top" alt={image.id} width={200} />
-							<input type="checkbox" className="form-check-input" onChange={() => this.handleImageSelection(image)} />
+					<div key={image.id} className="image-container">
+						<div className="image-card">
+						<input type="checkbox" className="form-check-input" onChange={() => this.handleImageSelection(image)} />
+							<figure>
+								<img src={image.url} className="card-img-top" alt={image.id} width={200} />
+								<figcaption>{image.label}</figcaption>
+							</figure>
+							
 						</div>
 					</div>
 				);
@@ -87,10 +90,10 @@ class UserDashboard extends Component {
 
 	// add a method to display the all the labels in the labels array
 	displayLabels = () => {
-		// get the labels from the localStorage
-		const labels = JSON.parse(sessionStorage.getItem('labels'));
+		// get the labels from the state
+		const { labels } = this.state;
 		// check if the labels array is not empty
-		if (labels.length > 0) {
+		if (labels.length) {
 			// display the labels in the labels array
 			return labels.map((label) => {
 				return (
@@ -98,6 +101,8 @@ class UserDashboard extends Component {
 				);
 			});
 		}
+		// else return null
+		return null;
 	};
 
 
@@ -168,9 +173,9 @@ class UserDashboard extends Component {
 		this.setState({ isHidden: !this.state.isHidden });
 		// change the button text based on the isHidden state
 		if (!this.state.isHidden) {
-			event.target.innerHTML = 'Show All Images';
+			event.target.innerHTML = 'View All';
 		} else {
-			event.target.innerHTML = 'Show Filtered Images';
+			event.target.innerHTML = 'View Selected';
 		}
 			// display the images in the images array
 		return filteredImages.map((image) => {
@@ -188,9 +193,7 @@ class UserDashboard extends Component {
 
 	// add a method to handle the label selection
 	handleLabelSelection = (event) => {
-		// get the selected label from the event
 		const selectedLabel = event.target.value;
-		// set state in response to the selected label
 		this.setState({ selectedLabel });
 	};
 
@@ -210,21 +213,23 @@ class UserDashboard extends Component {
 		return (
 			<div className="user-dashboard">
 				<div className="user-dashboard-header">
-					<div className="user-dashboard-header-title">User Dashboard</div>
-					<div className="user-dashboard-header-logout">
-						<button onClick={this.handleLogout}>Logout</button>
-					</div>
+					USER DASHBOARD
 				</div>
 				<div className="user-dashboard-body">
-					<div className="select-label">
-						<select onChange={this.handleLabelSelection}>
+					<div className="form-wrap">
+						<select className='label-control' onChange={this.handleLabelSelection}>
 							<option value="">Show all Images</option>
 							{this.displayLabels()}
 						</select>
-						<button onClick={this.handleLabelAssignment}>Assign/Reassign Label</button>
-						<button onClick={this.handleLabelDeletion}>Delete Label</button>
-						<button onClick={this.handleFilterImages}>View</button>
-
+						<div className='assign-btn-container'>
+							<button className='assign-btn' onClick={this.handleLabelAssignment}>Assign/Reassign</button>
+						</div>
+						<div className='delete-btn-container'>
+							<button className='delete-btn' onClick={this.handleLabelDeletion}>Delete Label</button>
+						</div>
+						<div className='view-btn-container'>
+							<button className='view-btn' onClick={this.handleFilterImages}>View Images</button>
+						</div>
 					</div>
 					{!this.state.isHidden ? this.displayImages() : this.state.images.filter((image) => image.label === this.state.selectedLabel).map((image) => {
 						return (
@@ -235,6 +240,9 @@ class UserDashboard extends Component {
 							</div>
 						);
 					})}
+				</div>
+				<div className="signout-container">
+						<button className='signout-btn' onClick={this.handleLogout}>Logout</button>
 				</div>
 			</div>
 		);

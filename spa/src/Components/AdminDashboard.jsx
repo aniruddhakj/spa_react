@@ -27,7 +27,7 @@ class AdminDashboard extends Component {
         const images = this.importAll(require.context('../../src/images', false, /\.(jpg)$/));
         // add the images to the images array from the src/images folder
         // set state in response to the images array
-        // in the url property, set the path to the image
+        // in the url property, path to the image is stored
         this.setState({
             images: Object.keys(images).map((image) => {
                 return { id: image, url: images[image], label: null };
@@ -49,6 +49,7 @@ class AdminDashboard extends Component {
     // add a new method to handle the click on the add label button
     handleNewLabelClick = () => {
         const { labels, newLabel } = this.state;
+        if(!newLabel) return;
         // append the new label to the labels array
         labels.push(newLabel);
         // save the labels array to sessionStorage
@@ -63,41 +64,38 @@ class AdminDashboard extends Component {
     };
 
 
+
     render() {
         const { logout, labels, images, newLabel } = this.state;
         if (logout) { 
             return <Navigate to="/" />
         }
+        // add link for font awesome icon
         return (
             <div className="container">
                 <div className="screen">
                     <div className="screen_content">
-                        <h1>Admin Dashboard</h1>
+                        <h1 className='heading'>Admin Dashboard</h1>
                         <div className="form-group">
-                            <label htmlFor="newLabel">Add a new label</label>
-                            <input type="text" className="form-control" id="newLabel" value={newLabel} onChange={this.handleNewLabelChange} />
-                            <button className="add-label-btn" onClick={this.handleNewLabelClick}>Add Label</button>
+                            <input type="text" className="form-control" placeholder='Add new label' id="newLabel" value={newLabel} onChange={this.handleNewLabelChange} />
+                            <button className="add-label-btn" onClick={this.handleNewLabelClick}><span>Add Label</span></button>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="labels">Labels</label>
-                            <select className="form-control" id="labels">
+                        <div className="form-wrap">
+                            <label htmlFor="labels" className='label-text'>Labels</label>
+                            <select className="label-control" id="labels">
                                 {labels.map((label) => {
                                     return <option key={label}>{label}</option>
                                 })}
                             </select>
                         </div>
-                        <button className="logout-btn" onClick={this.handleLogout}>Logout</button>
+                        <div className='logout-container'>
+                            {/* add font awesome icon with logout */}
+                                <button className="logout-btn" onClick={this.handleLogout}>Logout
+                                    {/* <i className="fas fa-sign-out-alt"></i> */}
+                                </button>
+                        </div>
                     </div>
                 </div>
-                {/* <div className="row">
-                    {images && images.map((image) => {
-                        return (
-                            <div className="col-4" key={image.id}>
-                                <img src={image.url} alt={image.id} width={360} className="img-fluid" />
-                            </div>
-                        )
-                    })}
-                </div> */}
             </div>
         );
     }

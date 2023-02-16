@@ -100,7 +100,6 @@ const Login = () => {
                             <input type="password" class="login__input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div class="login__field">
-                            <i class="login__icon fas fa-user"></i>
                             <select class="login__input" value={role} onChange={(e) => setRole(e.target.value)}>
                                 <option value="">Select Role</option>
                                 <option value="admin">Admin</option>
