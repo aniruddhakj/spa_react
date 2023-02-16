@@ -43,3 +43,7 @@ username: admin2
 password: admin2
 ```
 
+- To build the application
+```bash
+npm run build
+```
